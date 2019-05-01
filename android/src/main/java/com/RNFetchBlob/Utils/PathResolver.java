@@ -38,7 +38,7 @@ public class PathResolver {
 
                 final String id = DocumentsContract.getDocumentId(uri);
                 final Uri contentUri = ContentUris.withAppendedId(
-                        Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
+                        Uri.parse("content://downloads/public_downloads"), id.startsWith("raw:") ? Long.valueOf(id.substring(4)) : Long.valueOf(id));
 
                 return getDataColumn(context, contentUri, null, null);
             }
