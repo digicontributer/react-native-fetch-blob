@@ -37,6 +37,9 @@ public class PathResolver {
             else if (isDownloadsDocument(uri)) {
 
                 final String id = DocumentsContract.getDocumentId(uri);
+                if (id.startsWith("raw:")) {
+                    return id.substring(4);
+                }                
                 final Uri contentUri = ContentUris.withAppendedId(
                         Uri.parse("content://downloads/public_downloads"), id.startsWith("raw:") ? Long.valueOf(id.substring(4)) : Long.valueOf(id));
 
